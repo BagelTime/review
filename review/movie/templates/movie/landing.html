@@ -5,6 +5,7 @@
 
 {%block side %}
 <form method="post" action="#">
+    {% csrf_token %}
     {{ search_form }}
     <input type="submit" value="Search" style="margin-left:25%; margin-right: auto; margin-top:2%">
 </form>
