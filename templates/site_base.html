@@ -1,0 +1,24 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}ReviewIt{% endblock %}</title>
+            {% block head %}
+            {% endblock %}
+        <style>
+            {% block style %}
+            {% endblock %}
+        </style>
+    </head>
+    <body>
+        <!-- Heading -->
+        {% block top%}<div style="background:red; height:50px; text-align:center; font-size:27pt">Review It</div>{% endblock %}
+        <!-- Side bar -->
+         <div style="background:red; width:12%; height:1000px; float:left; "> 
+            <div style="padding: 41px 0px 0px 20px">{% block side %}side stuff{% endblock %} </div>
+         </div>
+        <!-- Content -->
+         <div style="width:88%; float:left; "> 
+            <div style="padding: 41px 0px 0px 20px">{% block content %}content{% endblock %} </div>
+        {#  <div style="padding: 41px 0px 0px 20px">{% block content %}content{% endblock %}</div> #}
+    </body>
+</html> 
