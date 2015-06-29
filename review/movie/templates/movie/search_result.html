@@ -1,0 +1,15 @@
+{% extends "movie/landing.html" %}
+{% load staticfiles %}
+
+
+{%block content %}
+
+  {% for movie in results %}
+    <div style="margin-left:25%; margin-right:auto; margin-bottom:20px">
+      <div style="font-weight:bold; font-size:24px;">{{ movie.title }} ({{ movie.release_date }}) </div>
+      <div> <image src="{{ movie.poster }}"/>  </div>
+      <div> {{ movie.desc }}  </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}
