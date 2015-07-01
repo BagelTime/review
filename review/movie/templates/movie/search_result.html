@@ -1,14 +1,51 @@
 {% extends "movie/landing.html" %}
 {% load staticfiles %}
 
+{%block style %}
+{{ block.super }}
+
+.movie-container{
+  margin: 11px auto;
+  width: 45%;
+  display: inline-block;
+  position: relative;
+ border: 1px solid black;
+}
+
+.movie-half-poster{
+  width: 342px;
+  height: 568px;;
+  margin: 0px;
+  float: left;
+  display: block;
+}
+
+.movie-half-info{
+  width: 342px;
+  height: 568px;
+  margin: 0px 0px 0px 8px;
+  float: left;
+  display: block;
+}
+{% endblock %}
 
 {%block content %}
 
   {% for movie in results %}
-    <div style="margin-left:25%; margin-right:auto; margin-bottom:20px">
-      <div style="font-weight:bold; font-size:24px;">{{ movie.title }} ({{ movie.release_date }}) </div>
-      <div> <image src="{{ movie.poster }}"/>  </div>
-      <div> {{ movie.desc }}  </div>
+    <!-- Movie container -->
+    <div class='movie-container'>
+     <!-- Movie Title and Poster -->
+     <div class="movie-half-poster">
+      <!-- Movie Title -->
+          <div style="font-weight:bold; font-size:24px; text-align: center">{{ movie.title }} ({{ movie.release_date }}) </div>
+      <!-- Movie poster -->
+        <div>
+
+            {% if movie.poster_path %}<image src="{{ poster_base }}{{ movie.poster_path }}"/>  {% endif %}</div>
+      </div>
+
+        <!-- Movie info -->
+        <div class="movie-half-info"> {{ movie.desc }}  </div>
     </div>
   {% endfor %}
 
