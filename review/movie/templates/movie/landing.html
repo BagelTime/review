@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+
+{%block side-image %}{% static 'images/movie.png' %}{% endblock %}
+
+{%block side %}
+<form method="post" action="{% url 'movie:search' %}">
+    {% csrf_token %}
+    {{ search_form }}
+    <input type="submit" value="Search" style="margin-left:25%; margin-right: auto; margin-top:2%">
+</form>
+{% endblock %}
+
+{%block content %}
+{% endblock %}
