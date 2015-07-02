@@ -14,19 +14,27 @@
 
 .movie-half-poster{
   width: 342px;
-  height: 568px;;
-  margin: 0px;
+height: 515px;;
+margin-left: 8px;
   float: left;
   display: block;
 }
 
 .movie-half-info{
   width: 342px;
-  height: 568px;
+height: 516px;
   margin: 0px 0px 0px 8px;
   float: left;
   display: block;
 }
+
+.title{
+font-weight:bold;
+font-size:24px;
+text-align: center;
+margin-bottom: 11px;
+
+
 {% endblock %}
 
 {%block content %}
@@ -34,19 +42,25 @@
   {% for movie in results %}
     <!-- Movie container -->
     <div class='movie-container'>
-     <!-- Movie Title and Poster -->
-     <div class="movie-half-poster">
-      <!-- Movie Title -->
-          <div style="font-weight:bold; font-size:24px; text-align: center">{{ movie.title }} ({{ movie.release_date }}) </div>
-      <!-- Movie poster -->
-        <div>
 
-            {% if movie.poster_path %}<image src="{{ poster_base }}{{ movie.poster_path }}"/>  {% endif %}</div>
-      </div>
+        <!-- Movie Title -->
+        <div class="title">{{ movie.title }} ({{ movie.release_date }})</div>
 
+        <!-- Movie Poster -->
+        <div class="movie-half-poster">
+
+            <!-- Movie poster -->
+            <div> {% if movie.poster_path %}
+                <image src="{{ poster_base }}{{ movie.poster_path }}"/>
+                {% endif %}
+            </div>
+        </div>
+        c
         <!-- Movie info -->
         <div class="movie-half-info"> {{ movie.desc }}  </div>
     </div>
+{% empty %}
+<div class="title">No Results</div>
   {% endfor %}
 
 {% endblock %}

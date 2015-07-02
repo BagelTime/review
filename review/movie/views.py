@@ -8,6 +8,7 @@ from django.conf import settings
 image_base_size = 'http://image.tmdb.org/t/p/w342'
 
 def search(request):
+    print "START SEARCH"
     form = SearchForm(request.POST)
 
     if form.is_valid():
@@ -29,4 +30,9 @@ def search(request):
 
             results.append(result)
 
-        return render(request, 'movie/search_result.html', {'results': results, 'poster_base': image_base_size})
+        if results:
+            return render(request, 'movie/search_result.html', {'results': results, 'poster_base': image_base_size})
+        else:
+            return render(request, 'movie/search_result.html', {'results': '', 'poster_base': image_base_size})
+    else:
+        return render(request, 'movie/search_result.html', {'results': []})
