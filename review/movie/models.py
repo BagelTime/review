@@ -3,7 +3,7 @@ from django.db import models
 class Category(models.Model):
     """"category to rate the movie on"""
 
-    icon = models.ImageField(upload_to='icons', max_length=100)
+    icon = models.FileField(upload_to='icons', max_length=100)
     name = models.CharField(max_length=100)
 
     def __unicode__(self):
