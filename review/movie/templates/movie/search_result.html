@@ -53,8 +53,9 @@ overflow:hidden;
 
     <!-- Movie Title -->
     <div class="title">
-        {{ movie.title|default_if_none:"<span style='font-variant: small-caps;'>??????????</span>" }})
-        ({{ movie.release_date|default_if_none:"<span style='font-variant: small-caps;'>?</span>" }})
+        {{ movie.title|default_if_none:"<span style='font-variant: small-caps;'>??????????</span>" }}
+        ({{ movie.release_date|default_if_none:"<span style='font-variant: small-caps;'>?</span>" }}
+        <span style='font-variant: small-caps;'>{{movie.rating|default_if_none:"NR" }}</span>)
     </div>
 
     <!-- Movie Poster -->
