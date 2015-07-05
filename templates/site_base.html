@@ -6,9 +6,7 @@
     <head>
         <title>{% block title %}Review It{% endblock %}</title>
             {% block head %}
-        {#
-        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-        #}
+        {# <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"> #}
             {% endblock %}
         <style>
             {% block style %}
@@ -21,7 +19,7 @@
         <!-- Side bar -->
          <div style="background:red; width:14%; height:1000px; float:left; ">
              <div style="padding: 0px 0px 0px 13px"> <image src="{% block side-image %}{% endblock %}" height=175px width=150px"> </div>
-             <div style="padding: 41px 0px 0px 3px">{% block side %}side stuff{% endblock %} </div>
+             <div style="padding: 41px 0px 0px 3px; overflow:hidden">{% block side %}side stuff{% endblock %} </div>
          </div>
         <!-- Content -->
         <div style="width:86%; float:left; ">

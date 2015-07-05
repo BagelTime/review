@@ -10,14 +10,18 @@ width: 45%;
 display: inline-block;
 position: relative;
 border: 1px solid black;
+overflow:hidden;
+min-width: 706.65px;
 }
 
 .movie-half-poster {
 height: 515px;
 float: left;
 display: block;
-width: 49%;
-margin: auto auto auto 10px;
+width: 48%;
+margin: auto auto auto 15px;
+overflow:hidden;
+min-width: 339.183px
 }
 
 
@@ -25,8 +29,10 @@ margin: auto auto auto 10px;
 height: 515px;
 float: left;
 display: block;
-width: 49%;
-margin: auto;
+width: 48%;
+margin: auto auto auto 5px;
+overflow:hidden;
+min-width: 339.183px
 }
 
 .title{
@@ -34,6 +40,7 @@ font-weight:bold;
 font-size:24px;
 text-align: center;
 margin-bottom: 11px;
+overflow:hidden;
 
 
 {% endblock %}
@@ -54,13 +61,11 @@ margin-bottom: 11px;
     <div class="movie-half-poster">
 
         <!-- Movie poster -->
-        <div>
-            {% if movie.poster_path %}
-            <image src="{{ poster_base }}{{ movie.poster_path }}"/>
-            {% else %}
-            <image src="{% static 'images/reel.jpg' %}" height="513" width=342"/>
+        {% if movie.poster_path %}
+        <image src="{{ poster_base }}{{ movie.poster_path }}"/>
+        {% else %}
+        <image src="{% static 'images/reel.jpg' %}" height="513" width=342"/>
             {% endif %}
-        </div>
     </div>
     <!-- Movie info -->
     <div class="movie-half-info"> {{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}
