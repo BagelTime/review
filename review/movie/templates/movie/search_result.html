@@ -42,7 +42,6 @@ text-align: center;
 margin-bottom: 11px;
 overflow:hidden;
 
-
 {% endblock %}
 
 {%block content %}
@@ -69,11 +68,22 @@ overflow:hidden;
             {% endif %}
     </div>
     <!-- Movie info -->
-    <div class="movie-half-info"> {{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}</div>
-    GENRES: {{ movie.genres }}
+    <div class="movie-half-info">
+        {# movie description as tool-tip #}
+        <a href="#" title="{{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}" >description</a>
+        {# movie genres #}
+        <div>{{ movie.genres|join:", " }}</div>
+    </div>
 </div>
 {% empty %}
 <div class="title">No Results</div>
 {% endfor %}
 
+{% endblock %}
+
+{% block body-end %}
+{ {block.super }}
+<script>
+  $( document ).tooltip();
+</script>
 {% endblock %}
