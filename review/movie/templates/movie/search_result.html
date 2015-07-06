@@ -72,7 +72,7 @@ overflow:hidden;
         {# movie description as tool-tip #}
         <a href="#" title="{{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}" >description</a>
         {# movie genres #}
-        <div>{{ movie.genres|join:", " }}</div>
+        <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
     </div>
 </div>
 {% empty %}

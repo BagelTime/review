@@ -49,7 +49,7 @@ def search(request):
                                                                                                 'release_date'] != None else None
             result['poster_path'] = s['poster_path'] if s.has_key('poster_path') and s['poster_path'] != None else None
             result['rating'] = rating
-            result['genres'] = genres if genres else None
+            result['genres'] = genres if genres else []
 
 
             results.append(result)
