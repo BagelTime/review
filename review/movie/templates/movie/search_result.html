@@ -70,7 +70,7 @@ overflow:hidden;
     <!-- Movie info -->
     <div class="movie-half-info">
         {# movie description as tool-tip #}
-        <a href="#" title="{{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}" >description</a>
+        <a href="#" title="{{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}" >Summary</a>
         {# movie genres #}
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
     </div>
