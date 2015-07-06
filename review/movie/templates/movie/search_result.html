@@ -69,8 +69,8 @@ overflow:hidden;
             {% endif %}
     </div>
     <!-- Movie info -->
-    <div class="movie-half-info"> {{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}
-    </div>
+    <div class="movie-half-info"> {{ movie.desc |default_if_none:"<span style='font-variant: small-caps;'>description not avaliable</span>"}}</div>
+    GENRES: {{ movie.genres }}
 </div>
 {% empty %}
 <div class="title">No Results</div>

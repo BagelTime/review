@@ -36,12 +36,11 @@ class Movie(models.Model):
         return self.title
 
 
-#class Genre(models.Model):
-#    """"General Category of Movie"""
-#    
-#    icon = models.ImageField(upload_to='icons', max_length=100)
-#    name = models.CharField(max_length=100)
-#
-#
-#    def __unicode__(self):
-#        return self.name
+class Genre(models.Model):
+   """"General Category of Movie"""
+   # icon = models.ImageField(upload_to='icons', max_length=100)
+   name = models.CharField(max_length=100)
+
+
+   def __unicode__(self):
+       return self.name
