@@ -73,6 +73,29 @@ overflow:hidden;
         <a href="#" title="{{ movie.desc |default_if_none:"Summary not avaliable"}}" >Summary</a>
         {# movie genres #}
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
+
+        {# TODO Replace words with icons #}
+        {% if movie.ranks %}
+            <div style="margin-top: 5px;">
+                <div> Funny: {{ movie.ranks.funny__avg }} </div>
+                <div> Action: {{ movie.ranks.action__avg }} </div>
+                <div> Sexual Content: {{ movie.ranks.sexual__avg }} </div>
+                <div> Adventure: {{ movie.ranks.adventure__avg }} </div>
+                <div> Sad: {{ movie.ranks.sad__avg }} </div>
+                <div> Romance: {{ movie.ranks.romance__avg }} </div>
+                <div> Alcohol / Drung Use: {{ movie.ranks.alcohol_drug__avg }} </div>
+                <div> Intelectual: {{ movie.ranks.intelectual__avg }} </div>
+                <div> Kid Feiendly: {{ movie.ranks.kid_friendly__avg }} </div>
+                <div> Violence: {{ movie.ranks.violence__avg }} </div>
+                <div> Gore: {{ movie.ranks.gore__avg }} </div>
+                <div> Acting Quality: {{ movie.ranks.acting__avg }} </div>
+                <div> Scarry: {{ movie.ranks.scare__avg }} </div>
+                <div> Bad Language: {{ movie.ranks.bad_language__avg }} </div>
+                <div> Confusing: {{ movie.ranks.confusing__avg }} </div>
+                <div> Overall: {{ movie.ranks.overall__avg }} </div>
+            </div>
+        {% endif %}
+
     </div>
 </div>
 {% empty %}

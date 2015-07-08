@@ -27,6 +27,8 @@ def db_resulte(item):
             'release_date': item['release_date'][:4] if item.has_key('release_date') and item['release_date'] != None else None,
              'poster_path':  item['poster_path'] if item.has_key('poster_path') and item['poster_path'] != None else None,
         }
+        ranks = {'ranks': movie.averages()}
+        result.update(ranks)
         return result
 
 
