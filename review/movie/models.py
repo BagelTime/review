@@ -29,14 +29,12 @@ class Movie(models.Model):
              Avg('funny'),
              Avg('sad'),
              Avg('intelectual'),
-             Avg('confusing'),
              Avg('romance'),
              Avg('action'),
              Avg('adventure'),
              Avg('kid_friendly'),
              Avg('sexual'),
              Avg('overall'),
-             Avg('acting'),
          )
 
 
