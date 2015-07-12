@@ -47,6 +47,11 @@ a.summary {
 color: black;
 }
 
+.tip {
+border: 1px solid red;
+box-shadow: 10px 10px 5px #888888;
+}
+
 {% endblock %}
 
 {%block content %}
@@ -116,6 +121,8 @@ color: black;
 {% block body-end %}
 {{block.super }}
 <script>
-  $( document ).tooltip();
+  $( document ).tooltip({
+  tooltipClass: "tip"
+});
 </script>
 {% endblock %}
