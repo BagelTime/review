@@ -15,7 +15,7 @@ min-width: 706.65px;
 }
 
 .movie-half-poster {
-height: 515px;
+#height: 515px;
 float: left;
 display: block;
 width: 48%;
@@ -26,7 +26,7 @@ min-width: 339.183px
 
 
 .movie-half-info {
-height: 515px;
+#height: 515px;
 float: left;
 display: block;
 width: 48%;
@@ -43,13 +43,19 @@ margin-bottom: 11px;
 overflow:hidden;
 }
 
-a.summary {
-color: black;
+a.summary, a.reviews {
+color: red;
 }
 
 .tip {
 border: 1px solid red;
 box-shadow: 10px 10px 5px #888888;
+}
+
+.cat-image{
+width: 22px;
+height: 22px;
+margin-right: 5px;
 }
 
 {% endblock %}
@@ -76,37 +82,40 @@ box-shadow: 10px 10px 5px #888888;
 
         <!-- Movie poster -->
         {% if movie.poster_path %}
-        <image src="{{ poster_base }}{{ movie.poster_path }}"/>
+        <image alt="poster for {{ movie.title }}" src="{{ poster_base }}{{ movie.poster_path }}"/>
         {% else %}
-        <image src="{% static 'images/reel.jpg' %}" height="513" width=342"/>
+        <image alt="poster for missing poster image" src="{% static 'images/reel.jpg' %}" height="513" width=342"/>
             {% endif %}
     </div>
     <!-- Movie info -->
     <div class="movie-half-info">
         {# movie description as tool-tip #}
-        <a class='summary' href="#" title="{{ movie.desc |default_if_none:" Summary not avaliable"}}" >Summary</a>
+        <a class='summary' href="#" title="{{ movie.desc |default_if_none:" Summary not avaliable"}}" alt="{{ movie.desc |default_if_none:" Summary not avaliable"}}">Summary</a>
         {# movie genres #}
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
 
         {# TODO Replace words with icons #}
-        {% if movie.ranks %}
-            <div style="margin-top: 5px;">
-                <div> Funny: {{ movie.ranks.funny__avg }} </div>
-                <div> Action: {{ movie.ranks.action__avg }} </div>
-                <div> Sexual Content: {{ movie.ranks.sexual__avg }} </div>
-                <div> Adventure: {{ movie.ranks.adventure__avg }} </div>
-                <div> Sad: {{ movie.ranks.sad__avg }} </div>
-                <div> Romance: {{ movie.ranks.romance__avg }} </div>
-                <div> Alcohol / Drung Use: {{ movie.ranks.alcohol_drug__avg }} </div>
-                <div> Intelectual: {{ movie.ranks.intelectual__avg }} </div>
-                <div> Kid Feiendly: {{ movie.ranks.kid_friendly__avg }} </div>
-                <div> Violence: {{ movie.ranks.violence__avg }} </div>
-                <div> Gore: {{ movie.ranks.gore__avg }} </div>
-                <div> Acting Quality: {{ movie.ranks.acting__avg }} </div>
-                <div> Scarry: {{ movie.ranks.scare__avg }} </div>
-                <div> Bad Language: {{ movie.ranks.bad_language__avg }} </div>
-                <div> Confusing: {{ movie.ranks.confusing__avg }} </div>
-                <div> Overall: {{ movie.ranks.overall__avg }} </div>
+        {% if movie.reviews %}
+            <div style="margin-top: 10px;">
+                <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
+                    <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
+                </div>
+                <div> <image title="Funniness" alt="Funniness" class="cat-image" src="{% static 'images/laugh.jpg'%}" />{{ movie.reviews.rank.funny__avg }} </div>
+                <div> <image title="Action" alt="Action" class="cat-image" src="{% static 'images/action.png'%}" /> {{ movie.reviews.rank.action__avg }} </div>
+                <div> <image title="Adventure" alt="Adventure" class="cat-image" src="{% static 'images/adventure.png'%}" /> {{ movie.reviews.rank.adventure__avg }} </div>
+                <div> <image title="Scarrness" alt="Scarrness" class="cat-image" src="{% static 'images/scarry.png'%}" /> {{ movie.reviews.rank.scare__avg }} </div>
+                <div> <image title="Romance" alt="Romance" class="cat-image" src="{% static 'images/heart.png'%}" /> {{ movie.reviews.rank.romance__avg }} </div>
+                <div> <image title="Tear Jerker" alt="Tear Jerker" class="cat-image" src="{% static 'images/sad.jpg'%}" /> {{ movie.reviews.rank.sad__avg }} </div>
+                <div> <image title="Sexual Content" alt="Sexual Content" class="cat-image" src="{% static 'images/male-female.jpg'%}" /> {{ movie.reviews.rank.sexual__avg }} </div>
+                <div> <image title="Alcohol / Drug Use" alt="Alcohol / Drug Use" class="cat-image" src="{% static 'images/drugs.png'%}" /> {{ movie.reviews.rank.alcohol_drug__avg }} </div>
+                <div> <image title="Violence" alt="Violence" class="cat-image" src="{% static 'images/violence.png'%}" /> {{ movie.reviews.rank.violence__avg }} </div>
+                <div> <image title="Gore" alt="Gore" class="cat-image" src="{% static 'images/gore.jpg'%}" /> {{ movie.reviews.rank.gore__avg }} </div>
+                <div> <image title="Bad Language" alt="Bad Language" class="cat-image" src="{% static 'images/bad_language.png'%}" /> {{ movie.reviews.rank.bad_language__avg }} </div>
+                <div> <image title="Intelectual" alt="Intelectual" class="cat-image" src="{% static 'images/thinker.png'%}" /> {{ movie.reviews.rank.intelectual__avg }} </div>
+                <div> <image title="Kid Friendly" alt="Kid Friendly" class="cat-image" src="{% static 'images/kid.jpg'%}" /> {{ movie.reviews.rank.kid_friendly__avg }} </div>
+                <div> <image title="Quality of Acting" alt="Quality of Acting" class="cat-image" src="{% static 'images/oscar.jpg'%}" /> {{ movie.reviews.rank.acting__avg }} </div>
+                <div> <image title="Confusing" alt="Confusing" class="cat-image" src="{% static 'images/question-mark-red.png'%}" /> {{ movie.reviews.rank.confusing__avg }} </div>
+                <div> <image title="Overall" alt="Overall" class="cat-image" src="{% static 'images/star.png'%}" /> {{ movie.reviews.rank.overall__avg }} </div>
             </div>
         {% endif %}
 
