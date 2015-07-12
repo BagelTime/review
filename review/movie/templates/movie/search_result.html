@@ -41,6 +41,11 @@ font-size:24px;
 text-align: center;
 margin-bottom: 11px;
 overflow:hidden;
+}
+
+a.summary {
+color: black;
+}
 
 {% endblock %}
 
@@ -74,7 +79,7 @@ overflow:hidden;
     <!-- Movie info -->
     <div class="movie-half-info">
         {# movie description as tool-tip #}
-        <a href="#" title="{{ movie.desc |default_if_none:"Summary not avaliable"}}" >Summary</a>
+        <a class='summary' href="#" title="{{ movie.desc |default_if_none:" Summary not avaliable"}}" >Summary</a>
         {# movie genres #}
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
 
