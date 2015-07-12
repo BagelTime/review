@@ -46,6 +46,10 @@ overflow:hidden;
 
 {%block content %}
 
+{% if results %}
+<div class="title">Results for '{{ query }}''</div>
+{% endif %}
+
 {% for movie in results %}
 <!-- Movie container -->
 <div class='movie-container'>

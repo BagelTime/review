@@ -90,7 +90,8 @@ def search(request):
         #TODO simplify below
 
         if results:
-            return render(request, 'movie/search_result.html', {'results': results, 'poster_base': image_base_size})
+            return render(request, 'movie/search_result.html',
+                          {'results': results, 'poster_base': image_base_size, 'query': query})
         else:
             return render(request, 'movie/search_result.html', {'results': '', 'poster_base': image_base_size})
     else:
