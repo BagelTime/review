@@ -1,7 +1,7 @@
 {% extends "site_base.html" %}
 {% load staticfiles %}
 
-{%block side-image %}{% static 'images/movie.png' %}{% endblock %}
+{%block side-image %}{% static 'images/slate.png' %}{% endblock %}
 
 {%block side %}
 <form method="post" action="{% url 'movie:search' %}">
@@ -12,4 +12,5 @@
 {% endblock %}
 
 {%block content %}
+        <image src="{% static 'images/movie.png' %}" style="opacity: 1; position: absolute; left: 30%; top: 24%; width: 516px; height: 600px;">
 {% endblock %}
