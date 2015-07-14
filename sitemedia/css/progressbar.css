@@ -1,0 +1,9 @@
+.progressbar {
+  width: 79%;
+  height: 5px;
+}
+
+.ui-widget-header {
+  background-image: none !important;
+  background-color: #FFA100 !important;
+}

@@ -1,6 +1,13 @@
 {% extends "movie/landing.html" %}
 {% load staticfiles %}
 
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/progressbar.css' %}">
+<script src="{% static 'js/progressbar.js' %}"></script>
+
+{% endblock %}
+
 {%block style %}
 {{ block.super }}
 
@@ -100,7 +107,8 @@ margin-right: 5px;
                 <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
                     <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
                 </div>
-                <div> <image title="Humor" alt="Humor" class="cat-image" src="{% static 'images/laugh.jpg'%}" />{{ movie.reviews.rank.funny__avg }} </div>
+                {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg"
+                cat_score=movie.reviews.rank.funny__avg %}
                 <div> <image title="Action" alt="Action" class="cat-image" src="{% static 'images/action.png'%}" /> {{ movie.reviews.rank.action__avg }} </div>
                 <div> <image title="Adventure" alt="Adventure" class="cat-image" src="{% static 'images/adventure.png'%}" /> {{ movie.reviews.rank.adventure__avg }} </div>
                 <div> <image title="Scary" alt="Scary" class="cat-image" src="{% static 'images/scarry.png'%}" /> {{ movie.reviews.rank.scare__avg }} </div>
