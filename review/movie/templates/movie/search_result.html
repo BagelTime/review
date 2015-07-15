@@ -102,7 +102,7 @@ margin-right: 5px;
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
 
         {# TODO Replace words with icons #}
-        {% if movie.reviews.count %}
+        {% if movie.reviews.count > 0 %}
             <div style="margin-top: 10px;">
                 <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
                     <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
