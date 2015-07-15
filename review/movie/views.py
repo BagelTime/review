@@ -23,9 +23,9 @@ def db_resulte(item):
             'title' : movie.title,
             'rating': movie.rating,
             'genres': [g.name for g in movie.genres.all()],
-            'desc': item['overview'] if item.has_key('overview') and item['overview'] != None else None,
-            'release_date': item['release_date'][:4] if item.has_key('release_date') and item['release_date'] != None else None,
-             'poster_path':  item['poster_path'] if item.has_key('poster_path') and item['poster_path'] != None else None,
+            'desc': movie.summary,
+            'release_date': movie.year,
+             'poster_path': movie.poster_path
         }
         review ={'reviews': {'rank': movie.averages(), 'count': movie.review_set.count} }
         result.update(review)
@@ -34,14 +34,15 @@ def db_resulte(item):
 
 def remote_result(item):
     #print "Looking Up %s %s" % (item['id'], unicode(item['title']))
-    movie = tmdb.Movies(item['id'])
-    rating_list = filter(lambda c: c['iso_3166_1'] == 'US', movie.releases()['countries'])
+    result = tmdb.Movies(item['id'])
+    rating_list = filter(lambda c: c['iso_3166_1'] == 'US', result.releases()['countries'])
     rating = rating_list[0]['certification'] if rating_list and rating_list[0]['certification'] else None
 
     #get genresgenre_ids
     genre_ids = item['genre_ids']
     #print "Genres: %s" % genre_ids
-    genres = None
+    genres = None #text of genres
+    genre_list = None # list of db objects
     if genre_ids:
         genre_query = Q(pk=genre_ids.pop())
         #print genre_query
@@ -49,6 +50,18 @@ def remote_result(item):
             genre_query |= Q(pk=g)
         genre_list = Genre.objects.filter(genre_query)
         genres = [g.name for g in genre_list]
+
+    movie = Movie()
+    movie.db_id = item['id']
+    movie.title =item['title'] if item.has_key('title') and item['title'] != None else None
+    movie.summary = item['overview'] if item.has_key('overview') and item['overview'] != None else None
+    movie.year = item['release_date'][:4] if item.has_key('release_date') and item['release_date'] != None else None
+    movie.poster_path = item['poster_path'] if item.has_key('poster_path') and item['poster_path'] != None else None
+    movie.rating = rating
+    movie.save()
+    if genre_list:
+        movie.genres.add(*genre_list)
+        movie.save()
 
     result = {
         'title': item['title'] if item.has_key('title') and item['title'] != None else None,

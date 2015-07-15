@@ -14,8 +14,11 @@ class Movie(models.Model):
     )
 
     db_id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=200)
-    rating = models.CharField(max_length=10, choices = RATING)
+    title = models.CharField(max_length=200, blank=True, null=True)
+    poster_path = models.CharField(max_length=200, blank=True, null=True)
+    year = models.IntegerField(null=True, blank=True)
+    summary = models.TextField(blank=True, null=True)
+    rating = models.CharField(max_length=10, choices = RATING, null=True)
     genres = models.ManyToManyField('Genre', blank=True)
 
 
