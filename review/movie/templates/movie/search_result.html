@@ -102,7 +102,7 @@ margin-right: 5px;
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
 
         {# TODO Replace words with icons #}
-        {% if movie.reviews %}
+        {% if movie.reviews.count %}
             <div style="margin-top: 10px;">
                 <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
                     <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
@@ -123,6 +123,11 @@ margin-right: 5px;
                 {% include "snippets/progressbar.html" with cat_desc="Kid Friendly" cat_image="images/kid.jpg" cat_score=movie.reviews.rank.kid_friendly__avg %}
                 {% include "snippets/progressbar.html" with cat_desc="Overall" cat_image="images/star.png" cat_score=movie.reviews.rank.overall__avg %}
             </div>
+        {% else %}
+            <div style="margin-top: 10px;">
+                <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
+                    <a class="reviews" href="#">Be The First To Review This Movie</a>
+                </div>
         {% endif %}
 
     </div>
