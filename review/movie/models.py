@@ -69,6 +69,7 @@ class Review(models.Model):
 
     movie = models. ForeignKey(Movie) #parent movie
     review = models.TextField(blank=True, null=True) # text paragraph
+    reviewer = models.CharField(max_length=100, default="?")
 
     # categories
     scare = models.IntegerField(choices=RANKINGS, blank=True, null=True)
@@ -89,4 +90,4 @@ class Review(models.Model):
     acting = models.IntegerField(choices=RANKINGS, blank=True, null=True)
 
     def __unicode__(self):
-        return 'Review for %s' % self.movie.title
+        return 'Review for %s by %s' % (self.movie.title, self.reviewer)
