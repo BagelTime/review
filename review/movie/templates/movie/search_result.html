@@ -107,21 +107,21 @@ margin-right: 5px;
                 <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
                     <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
                 </div>
-                {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg"
-                cat_score=movie.reviews.rank.funny__avg %}
-                <div> <image title="Action" alt="Action" class="cat-image" src="{% static 'images/action.png'%}" /> {{ movie.reviews.rank.action__avg }} </div>
-                <div> <image title="Adventure" alt="Adventure" class="cat-image" src="{% static 'images/adventure.png'%}" /> {{ movie.reviews.rank.adventure__avg }} </div>
-                <div> <image title="Scary" alt="Scary" class="cat-image" src="{% static 'images/scarry.png'%}" /> {{ movie.reviews.rank.scare__avg }} </div>
-                <div> <image title="Romance" alt="Romance" class="cat-image" src="{% static 'images/heart.png'%}" /> {{ movie.reviews.rank.romance__avg }} </div>
-                <div> <image title="Tear Jerker" alt="Tear Jerker" class="cat-image" src="{% static 'images/sad.jpg'%}" /> {{ movie.reviews.rank.sad__avg }} </div>
-                <div> <image title="Sexual Content" alt="Sexual Content" class="cat-image" src="{% static 'images/male-female.jpg'%}" /> {{ movie.reviews.rank.sexual__avg }} </div>
-                <div> <image title="Alcohol / Drug Use" alt="Alcohol / Drug Use" class="cat-image" src="{% static 'images/drugs.png'%}" /> {{ movie.reviews.rank.alcohol_drug__avg }} </div>
-                <div> <image title="Violence" alt="Violence" class="cat-image" src="{% static 'images/violence.png'%}" /> {{ movie.reviews.rank.violence__avg }} </div>
-                <div> <image title="Gore" alt="Gore" class="cat-image" src="{% static 'images/gore.jpg'%}" /> {{ movie.reviews.rank.gore__avg }} </div>
-                <div> <image title="Profanity" alt="Profanity" class="cat-image" src="{% static 'images/bad_language.png'%}" /> {{ movie.reviews.rank.bad_language__avg }} </div>
-                <div> <image title="Intellectual" alt="Intellectual" class="cat-image" src="{% static 'images/brain.png'%}" /> {{ movie.reviews.rank.intelectual__avg }} </div>
-                <div> <image title="Kid Friendly" alt="Kid Friendly" class="cat-image" src="{% static 'images/kid.jpg'%}" /> {{ movie.reviews.rank.kid_friendly__avg }} </div>
-                <div> <image title="Overall" alt="Overall" class="cat-image" src="{% static 'images/star.png'%}" /> {{ movie.reviews.rank.overall__avg }} </div>
+
+                {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=movie.reviews.rank.funny__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Action" cat_image="images/action.png" cat_score=movie.reviews.rank.action__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Adventure" cat_image="images/adventure.png" cat_score=movie.reviews.rank.adventure__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Scary" cat_image="images/scarry.png" cat_score=movie.reviews.rank.scare__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Romance" cat_image="images/heart.png" cat_score=movie.reviews.rank.romance__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Tear Jerker" cat_image="images/sad.jpg" cat_score=movie.reviews.rank.sad__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Sexual Content" cat_image="images/male-female.jpg" cat_score=movie.reviews.rank.sexual__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Drug / Alcohol Use" cat_image="images/drugs.png" cat_score=movie.reviews.rank.alcohol_drug__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Violence" cat_image="images/violence.png" cat_score=movie.reviews.rank.violence__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Gore" cat_image="images/gore.jpg" cat_score=movie.reviews.rank.gore__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Profanity" cat_image="images/bad_language.png" cat_score=movie.reviews.rank.bad_language__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Intellectual" cat_image="images/brain.png" cat_score=movie.reviews.rank.intellectual__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Kid Friendly" cat_image="images/kid.jpg" cat_score=movie.reviews.rank.kid_friendly__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Overall" cat_image="images/star.png" cat_score=movie.reviews.rank.overall__avg %}
             </div>
         {% endif %}
 
