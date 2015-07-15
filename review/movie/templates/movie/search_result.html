@@ -3,7 +3,7 @@
 
 {% block head %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'css/progressbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/progressbar.css' %}"/>
 <script src="{% static 'js/progressbar.js' %}"></script>
 
 {% endblock %}
@@ -91,22 +91,23 @@ margin-right: 5px;
         {% if movie.poster_path %}
         <image alt="poster for {{ movie.title }}" src="{{ poster_base }}{{ movie.poster_path }}"/>
         {% else %}
-        <image alt="poster for missing poster image" src="{% static 'images/reel.jpg' %}" height="513" width=342"/>
-            {% endif %}
+        <image alt="poster for missing poster image" src="{% static 'images/reel.jpg' %}" height="513" width="342"/>
+        {% endif %}
     </div>
     <!-- Movie info -->
     <div class="movie-half-info">
         {# movie description as tool-tip #}
-        <a class='summary' href="#" title="{{ movie.desc |default_if_none:" Summary not avaliable"}}" alt="{{ movie.desc |default_if_none:" Summary not avaliable"}}">Summary</a>
+        <a class='summary' href="#" title="{{ movie.desc |default_if_none:" Summary not avaliable"}}" alt="{{ movie.desc
+        |default_if_none:" Summary not avaliable"}}">Summary</a>
         {# movie genres #}
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
 
-        {# TODO Replace words with icons #}
+        {# TODO Cleanup divs here #}
         {% if movie.reviews.count > 0 %}
-            <div style="margin-top: 10px;">
-                <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
-                    <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
-                </div>
+        <div style="margin-top: 10px;">
+            <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
+                <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
+            </div>
 
                 {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=movie.reviews.rank.funny__avg %}
                 {% include "snippets/progressbar.html" with cat_desc="Action" cat_image="images/action.png" cat_score=movie.reviews.rank.action__avg %}
@@ -124,10 +125,11 @@ margin-right: 5px;
                 {% include "snippets/progressbar.html" with cat_desc="Overall" cat_image="images/star.png" cat_score=movie.reviews.rank.overall__avg %}
             </div>
         {% else %}
-            <div style="margin-top: 10px;">
-                <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
-                    <a class="reviews" href="#">Be The First To Review This Movie</a>
-                </div>
+        <div style="margin-top: 10px;">
+            <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
+                <a class="reviews" href="#">xxx</a>
+            </div>
+        </div>
         {% endif %}
 
     </div>
@@ -144,5 +146,7 @@ margin-right: 5px;
   $( document ).tooltip({
   tooltipClass: "tip"
 });
+
+
 </script>
 {% endblock %}
