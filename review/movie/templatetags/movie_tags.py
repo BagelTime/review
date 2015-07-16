@@ -9,5 +9,5 @@ register = template.Library()
 @stringfilter
 def spoiler(value):
     p = re.compile('\*\*([^\*]+)\*\*')
-    result = p.sub('<span class="spoiler" title="\\1">[SPOILER]</span>', value)
+    result = p.sub('<span class="spoiler" title="\\1" alt="Spoiler Alert">[SPOILER]</span>', value)
     return mark_safe(result)
