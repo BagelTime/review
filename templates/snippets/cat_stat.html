@@ -1,0 +1,6 @@
+{% load staticfiles %}
+
+<span style="margin-right:20px;">
+  <image title="{{ cat_desc }}" alt="{{ cat_desc }}" class="cat-image" src="{% static cat_image %}" />:
+  {{ cat_score|default_if_none:'0'|floatformat }}
+</span>

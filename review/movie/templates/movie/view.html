@@ -14,7 +14,6 @@
 .movie-container{
 margin: 11px auto;
 width: 45%;
-display: inline-block;
 position: relative;
 border: 1px solid black;
 overflow:hidden;
@@ -101,7 +100,7 @@ margin-right: 5px;
         {% if movie.review_set.count > 0 %}
         <div style="margin-top: 10px;">
             <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
-                <a class="reviews" href="#">Overview</a>
+                <a class="reviews" href="#">{{movie.review_set.count }} Review{{movie.review_set_count|pluralize }}</a>
             </div>
 
                 {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=rank.funny__avg %}
@@ -130,6 +129,34 @@ margin-right: 5px;
     </div>
 </div>
 {% endif %}
+
+{# list reviews #}
+{% for r in  movie.review_set.all %}
+  <div class='movie-container'>
+    <span style="font-weight:bold; color:red">{{ r.reviewer }}:</span> {{ r.review }}
+      <div style="margin-top:5px;">
+        <div style="margin: 8px;">
+          {% include "snippets/cat_stat.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=rank.funny__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Action" cat_image="images/action.png" cat_score=rank.action__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Adventure" cat_image="images/adventure.png" cat_score=rank.adventure__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Scary" cat_image="images/scarry.png" cat_score=rank.scare__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Romance" cat_image="images/heart.png" cat_score=rank.romance__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Tear Jerker" cat_image="images/sad.jpg" cat_score=rank.sad__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Sexual Content" cat_image="images/male-female.jpg" cat_score=rank.sexual__avg %}
+        </div>
+        <div style="margin: 8px;">
+          {% include "snippets/cat_stat.html" with cat_desc="Drug / Alcohol Use" cat_image="images/drugs.png" cat_score=rank.alcohol_drug__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Violence" cat_image="images/violence.png" cat_score=rank.violence__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Gore" cat_image="images/gore.jpg" cat_score=rank.gore__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Profanity" cat_image="images/bad_language.png" cat_score=rank.bad_language__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Intellectual" cat_image="images/brain.png" cat_score=rank.intelectual__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Kid Friendly" cat_image="images/kid.jpg" cat_score=rank.kid_friendly__avg %}
+          {% include "snippets/cat_stat.html" with cat_desc="Overall" cat_image="images/star.png" cat_score=rank.overall__avg %}
+        </div>
+      </div>
+  </div>
+{% endfor %}
+
 
 {% endblock %}
 
