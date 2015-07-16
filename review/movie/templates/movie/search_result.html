@@ -54,6 +54,11 @@ a.summary, a.reviews {
 color: red;
 }
 
+a.summary:hover {
+color: white;
+background: red;
+}
+
 .tip {
 border: 1px solid red;
 box-shadow: 10px 10px 5px #888888;
@@ -64,6 +69,8 @@ width: 26px;
 height: 26px;
 margin-right: 5px;
 }
+
+a.reviews:hover{color:black; background:red;}
 
 {% endblock %}
 
@@ -105,7 +112,7 @@ margin-right: 5px;
         {% if movie.reviews.count > 0 %}
         <div style="margin-top: 10px;">
             <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
-                <a class="reviews" href="#">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
+                <a class="reviews" href="{% url 'movie:movie' id=movie.id %}">{{movie.reviews.count }} Review{{movie.reviews.count|pluralize }}</a>
             </div>
 
                 {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=movie.reviews.rank.funny__avg %}

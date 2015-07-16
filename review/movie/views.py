@@ -22,6 +22,7 @@ def db_resulte(item):
         movie = movie_list[0]
         #print "Found %s %s in DB" % (unicode(movie.title), movie.db_id)
         result = {
+            'id': movie.pk,
             'title' : movie.title,
             'rating': movie.rating,
             'genres': [g.name for g in movie.genres.all()],
@@ -66,6 +67,7 @@ def remote_result(item):
         movie.save()
 
     result = {
+        'id': item['id'],
         'title': item['title'] if item.has_key('title') and item['title'] != None else None,
         'desc': item['overview'] if item.has_key('overview') and item['overview'] != None else None,
         'release_date': item['release_date'][:4] if item.has_key('release_date') and item['release_date'] != None else None,
