@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.db.models.expressions import Q
+from django.shortcuts import get_object_or_404
 from review.movie.forms import SearchForm
 from review.movie.models import Genre, Movie
 import tmdbsimple as tmdb
+from django.http import Http404
 
 
 #TODO replace with image config later
@@ -109,3 +111,16 @@ def search(request):
             return render(request, 'movie/search_result.html', {'results': '', 'poster_base': image_base_size})
     else:
         return render(request, 'movie/search_result.html', {'results': []})
+
+
+def movie(request, id):
+    print "MOVIE ID: %s" % id
+    movie_list = Movie.objects.filter(pk=id).prefetch_related()
+    if movie_list:
+        movie = movie_list[0]
+        genres = [g.name for g in movie.genres.all()]
+        print movie
+        return render(request, 'movie/view.html', {'movie': movie, 'genres': genres, 'poster_base': image_base_size, 'rank': movie.averages()})
+    else:
+        raise  Http404("Movie %s does not exist" % id)
+

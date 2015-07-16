@@ -97,8 +97,7 @@ margin-right: 5px;
     <!-- Movie info -->
     <div class="movie-half-info">
         {# movie description as tool-tip #}
-        <a class='summary' href="#" title="{{ movie.desc |default_if_none:" Summary not avaliable"}}" alt="{{ movie.desc
-        |default_if_none:" Summary not avaliable"}}">Summary</a>
+        <a class='summary' href="#" title="{{ movie.desc |default_if_none:" Summary not avaliable"}}" alt="{{ movie.desc |default_if_none:" Summary not avaliable"}}">Summary</a>
         {# movie genres #}
         <div><span style="font-weight:bold">Genres:</span> {{ movie.genres|join:", " }}</div>
 

@@ -1,4 +1,4 @@
 {% load staticfiles %}
 <div style='display:inline-block'> <image title="{{ cat_desc }}" alt="{{ cat_desc }}" class="cat-image" src={% static cat_image %} /> </div> {# image #}
 <div style='display:inline-block' class='progressbar' rate='{{ cat_score }}'></div> {# bar #}
-<div style='display:inline-block'>{{ cat_score|floatformat }}</div> {# score #}
+<div style='display:inline-block'>{{ cat_score|default_if_none:'0'|floatformat  }}</div> {# score #}

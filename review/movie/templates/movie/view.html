@@ -1,0 +1,145 @@
+{% extends "movie/landing.html" %}
+{% load staticfiles %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/progressbar.css' %}"/>
+<script src="{% static 'js/progressbar.js' %}"></script>
+
+{% endblock %}
+
+{%block style %}
+{{ block.super }}
+
+.movie-container{
+margin: 11px auto;
+width: 45%;
+display: inline-block;
+position: relative;
+border: 1px solid black;
+overflow:hidden;
+min-width: 706.65px;
+}
+
+.movie-half-poster {
+#height: 515px;
+float: left;
+display: block;
+width: 48%;
+margin: auto auto auto 15px;
+overflow:hidden;
+min-width: 339.183px
+}
+
+
+.movie-half-info {
+#height: 515px;
+float: left;
+display: block;
+width: 48%;
+margin: auto auto auto 5px;
+overflow:hidden;
+min-width: 339.183px
+}
+
+.title{
+font-weight:bold;
+font-size:24px;
+text-align: center;
+margin-bottom: 11px;
+overflow:hidden;
+}
+
+a.summary, a.reviews {
+color: red;
+}
+
+.tip {
+border: 1px solid red;
+box-shadow: 10px 10px 5px #888888;
+}
+
+.cat-image{
+width: 26px;
+height: 26px;
+margin-right: 5px;
+}
+
+{% endblock %}
+
+{%block content %}
+
+{% if movie %}
+<!-- Movie container -->
+<div class='movie-container'>
+
+    <!-- Movie Title -->
+    <div class="title">
+        {{ movie.title|default_if_none:"<span style='font-variant: small-caps;'>??????????</span>" }}
+        ({{ movie.year|default_if_none:"<span style='font-variant: small-caps;'>?</span>" }}
+        <span style='font-variant: small-caps;'>{{movie.rating|default_if_none:"NR" }}</span>)
+    </div>
+
+    <!-- Movie Poster -->
+    <div class="movie-half-poster">
+
+        <!-- Movie poster -->
+        {% if movie.poster_path %}
+        <image alt="poster for {{ movie.title }}" src="{{ poster_base }}{{ movie.poster_path }}"/>
+        {% else %}
+        <image alt="poster for missing poster image" src="{% static 'images/reel.jpg' %}" height="513" width="342"/>
+        {% endif %}
+    </div>
+    <!-- Movie info -->
+    <div class="movie-half-info">
+        {# movie description as tool-tip #}
+        <a class='summary' href="#" title="{{ movie.summary |default_if_none:" Summary not avaliable"}}" alt="{{ movie.summary |default_if_none:" Summary not avaliable"}}">Summary</a>
+        {# movie genres #}
+        <div><span style="font-weight:bold">Genres:</span> {{ genres|join:", " }}</div>
+
+        {# TODO Cleanup divs here #}
+        {% if movie.review_set.count > 0 %}
+        <div style="margin-top: 10px;">
+            <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
+                <a class="reviews" href="#">Overview</a>
+            </div>
+
+                {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=rank.funny__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Action" cat_image="images/action.png" cat_score=rank.action__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Adventure" cat_image="images/adventure.png" cat_score=rank.adventure__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Scary" cat_image="images/scarry.png" cat_score=rank.scare__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Romance" cat_image="images/heart.png" cat_score=rank.romance__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Tear Jerker" cat_image="images/sad.jpg" cat_score=rank.sad__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Sexual Content" cat_image="images/male-female.jpg" cat_score=rank.sexual__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Drug / Alcohol Use" cat_image="images/drugs.png" cat_score=rank.alcohol_drug__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Violence" cat_image="images/violence.png" cat_score=rank.violence__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Gore" cat_image="images/gore.jpg" cat_score=rank.gore__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Profanity" cat_image="images/bad_language.png" cat_score=rank.bad_language__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Intellectual" cat_image="images/brain.png" cat_score=rank.intelectual__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Kid Friendly" cat_image="images/kid.jpg" cat_score=rank.kid_friendly__avg %}
+                {% include "snippets/progressbar.html" with cat_desc="Overall" cat_image="images/star.png" cat_score=rank.overall__avg %}
+            </div>
+        {% else %}
+        <div style="margin-top: 10px;">
+            <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
+                <a class="reviews" href="#">Be The First To Review This Movie</a>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block body-end %}
+{{block.super }}
+<script>
+  $( document ).tooltip({
+  tooltipClass: "tip"
+});
+
+
+</script>
+{% endblock %}

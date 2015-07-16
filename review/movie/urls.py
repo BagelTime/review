@@ -5,5 +5,7 @@ from review.movie import views
 urlpatterns = [
 
     url(r'^$', TemplateView.as_view(template_name='movie/landing.html'), name='landing'),
+    url(r'^(?P<id>\d+)$',views.movie, name='movie'),
     url(r'^search$',views.search, name='search'),
+
 ]
