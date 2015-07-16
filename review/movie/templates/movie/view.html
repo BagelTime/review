@@ -1,5 +1,6 @@
 {% extends "movie/landing.html" %}
 {% load staticfiles %}
+{% load movie_tags %}
 
 {% block head %}
 {{ block.super }}
@@ -71,6 +72,19 @@ margin-right: 5px;
 
 a.reviews {text-decoration: none;}
 
+.spoiler {
+color: red;
+background: black;
+font-variant: small-caps;
+}
+
+
+.spoiler:hover {
+color: black;
+background: red;
+font-variant: small-caps;
+}
+
 {% endblock %}
 
 {%block content %}
@@ -140,7 +154,7 @@ a.reviews {text-decoration: none;}
 {# list reviews #}
 {% for r in  movie.review_set.all %}
   <div class='movie-container'>
-    <span style="font-weight:bold; color:red">{{ r.reviewer }}:</span> {{ r.review }}
+    <span style="font-weight:bold; color:red">{{ r.reviewer }}:</span> {{ r.review|spoiler }}
       <div style="margin-top:5px;">
         <div style="margin: 8px;">
           {% include "snippets/cat_stat.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=r.funny%}
