@@ -59,7 +59,7 @@ def remote_result(item):
     movie.db_id = item['id']
     movie.title =item['title'] if item.has_key('title') and item['title'] != None else None
     movie.summary = item['overview'] if item.has_key('overview') and item['overview'] != None else None
-    movie.year = item['release_date'][:4] if item.has_key('release_date') and item['release_date'] != None else None
+    movie.year = item['release_date'][:4] if item.has_key('release_date') and item['release_date'] else None
     movie.poster_path = item['poster_path'] if item.has_key('poster_path') and item['poster_path'] != None else None
     movie.rating = rating
     movie.save()
@@ -117,12 +117,12 @@ def search(request):
 
 
 def movie(request, id):
-    print "MOVIE ID: %s" % id
+    #print "MOVIE ID: %s" % id
     movie_list = Movie.objects.filter(pk=id).prefetch_related()
     if movie_list:
         movie = movie_list[0]
         genres = [g.name for g in movie.genres.all()]
-        print movie
+        #print movie
         return render(request, 'movie/view.html', {'movie': movie, 'genres': genres, 'poster_base': image_base_size, 'rank': movie.averages()})
     else:
         raise  Http404("Movie %s does not exist" % id)
@@ -130,12 +130,12 @@ def movie(request, id):
 
 def review(request, id):
     if request.method == 'POST':
-        print "IN POST"
+        #print "IN POST"
         form = ReviewForm(request.POST)
-        print request.POST
+        #print request.POST
         if form.is_valid():
-            print "VALID"
-            print "FORM: %s" % form
+            #print "VALID"
+            #print "FORM: %s" % form
             form.save()
             return HttpResponseRedirect(reverse('movie:movie', kwargs={'id':id}))
         else:
@@ -146,13 +146,13 @@ def review(request, id):
                 return render(request, 'movie/review.html', {'form': form, 'movie': movie, 'genres': genres, 'poster_base': image_base_size})
 
     else:
-        print "MOVIE ID: %s" % id
+        #print "MOVIE ID: %s" % id
         movie_list = Movie.objects.filter(pk=id).prefetch_related()
         if movie_list:
             movie = movie_list[0]
             form = ReviewForm(initial={'movie':movie})
             genres = [g.name for g in movie.genres.all()]
-            print movie
+            #print movie
             return render(request, 'movie/review.html', {'form': form, 'movie': movie, 'genres': genres, 'poster_base': image_base_size})
         else:
             raise  Http404("Movie %s does not exist" % id)

@@ -138,6 +138,9 @@ ul.errorlist li {color: red; margin: 0px;}
             {{ form.movie }} {# hidden movie code #}
             <div>  {{ form.reviewer.errors }}  <span style="font-weight:bold">Your Name:</span>{{ form.reviewer }}</div>
             <div><span style="font-weight:bold">Write a review:</span>{{ form.review }}</div>
+            <div><span style="font-weight: bold">NOTE:</span> If you want to include information that may be a spoiler, you can
+            inclose the sections(s) in "**" like this: **soylent green is people**
+            This will hide the section of text and give the reader the option to view the content or not.</div>
     </div>
 </div>
 {% endif %}
