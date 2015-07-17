@@ -129,7 +129,6 @@ font-variant: small-caps;
         {% if movie.review_set.count > 0 %}
         <div style="margin-top: 10px;">
             <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
-                <a class="reviews" href="#">{{movie.review_set.count }} Review{{movie.review_set_count|pluralize }}</a>
                 <a class="reviews" style="margin-left:15px" href="{% url 'movie:review' id=movie.db_id %}">Review It </a>
             </div>
 
