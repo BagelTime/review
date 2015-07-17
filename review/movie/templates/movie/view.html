@@ -125,6 +125,7 @@ font-variant: small-caps;
         <div style="margin-top: 10px;">
             <div style="margin-bottom: 5px;background-color: black; color: white; text-align: center;">
                 <a class="reviews" href="#">{{movie.review_set.count }} Review{{movie.review_set_count|pluralize }}</a>
+                <a class="reviews" style="margin-left:15px" href="{% url 'movie:review' id=movie.id %}">Review It </a>
             </div>
 
                 {% include "snippets/progressbar.html" with cat_desc="Humor" cat_image="images/laugh.jpg" cat_score=rank.funny__avg %}
