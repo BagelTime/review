@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.db.models.expressions import Q
 from django.shortcuts import get_object_or_404
-from review.movie.forms import SearchForm
+from review.movie.forms import SearchForm,ReviewForm
 from review.movie.models import Genre, Movie
 import tmdbsimple as tmdb
 from django.http import Http404
@@ -126,3 +127,32 @@ def movie(request, id):
     else:
         raise  Http404("Movie %s does not exist" % id)
 
+
+def review(request, id):
+    if request.method == 'POST':
+        print "IN POST"
+        form = ReviewForm(request.POST)
+        print request.POST
+        if form.is_valid():
+            print "VALID"
+            print "FORM: %s" % form
+            form.save()
+            return HttpResponseRedirect(reverse('movie:movie', kwargs={'id':id}))
+        else:
+            movie_list = Movie.objects.filter(pk=id).prefetch_related()
+            if movie_list:
+                movie = movie_list[0]
+                genres = [g.name for g in movie.genres.all()]
+                return render(request, 'movie/review.html', {'form': form, 'movie': movie, 'genres': genres, 'poster_base': image_base_size})
+
+    else:
+        print "MOVIE ID: %s" % id
+        movie_list = Movie.objects.filter(pk=id).prefetch_related()
+        if movie_list:
+            movie = movie_list[0]
+            form = ReviewForm(initial={'movie':movie})
+            genres = [g.name for g in movie.genres.all()]
+            print movie
+            return render(request, 'movie/review.html', {'form': form, 'movie': movie, 'genres': genres, 'poster_base': image_base_size})
+        else:
+            raise  Http404("Movie %s does not exist" % id)

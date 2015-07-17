@@ -72,7 +72,7 @@ class Review(models.Model):
 
     movie = models. ForeignKey(Movie) #parent movie
     review = models.TextField(blank=True, null=True) # text paragraph
-    reviewer = models.CharField(max_length=100, default="?")
+    reviewer = models.CharField(max_length=100)
 
     # categories
     scare = models.IntegerField(choices=RANKINGS, blank=True, null=True)
@@ -83,14 +83,12 @@ class Review(models.Model):
     funny = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     sad = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     intelectual = models.IntegerField(choices=RANKINGS, blank=True, null=True)
-    confusing = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     romance = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     action = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     adventure = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     kid_friendly = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     sexual = models.IntegerField(choices=RANKINGS, blank=True, null=True)
     overall = models.IntegerField(choices=RANKINGS, blank=True, null=True)
-    acting = models.IntegerField(choices=RANKINGS, blank=True, null=True)
 
     def __unicode__(self):
         return 'Review for %s by %s' % (self.movie.title, self.reviewer)

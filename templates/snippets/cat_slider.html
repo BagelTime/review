@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<script>
+  $(function() {
+    var select = $( ".{{ cat_class }}" );
+    var slider = $( "<div id='slider' style='display:inline-block;'></div>" ).insertBefore( select ).slider({
+      min: 0,
+      max: 10,
+      range: "min",
+      value: select[ 0 ].selectedIndex,
+      slide: function( event, ui ) {
+        select[ 0 ].selectedIndex = ui.value;
+      }
+    });
+    $( ".{{ cat_class }}" ).change(function() {
+      slider.slider( "value", this.selectedIndex );
+    });
+  });
+  </script>
+
+
+<div>
+    <div style='display:inline-block'> <image title="{{ cat_desc }}" alt="{{ cat_desc }}" class="cat-image" src={% static cat_image %} /> </div> {# image #}
+   <div style='display:inline-block'>{{ cat_score }} </div> {# slider #}
+</div>
